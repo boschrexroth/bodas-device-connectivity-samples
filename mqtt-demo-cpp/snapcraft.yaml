@@ -1,0 +1,61 @@
+###The MIT License
+
+###Copyright 2020 Bosch Rexroth AG
+
+###Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+###The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+###THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+name: rcu-cpp-example
+base: core18
+version: '0.1'
+summary: rcu-cpp-example
+description: |
+  rcu-cpp-example.
+grade: devel
+confinement: devmode
+architectures:
+  - build-on: [armhf]
+    run-on: [armhf]
+
+apps:
+  rcu-cpp-example:
+    command: usr/local/bin/demo
+    daemon: simple
+    environment:
+      LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP/usr/lib/:$SNAP/lib:$SNAP/usr/local/lib/
+
+parts:
+  paho-c:
+    plugin: cmake
+    source: https://github.com/eclipse/paho.mqtt.c.git
+    build-packages: [libssl-dev]
+    configflags:
+      - "-DPAHO_WITH_SSL=ON" 
+  
+  paho-cpp:
+    plugin: cmake
+    source: https://github.com/eclipse/paho.mqtt.cpp.git
+    build-packages: [libssl-dev]
+    configflags:
+      - "-DPAHO_WITH_SSL=ON" 
+  
+  app:
+    plugin: cmake
+    source: demo
+    build-packages: [libssl-dev]
+
+  dump-files:
+    plugin: dump
+    source: .
+    filesets:
+      exclude:
+        - -demo
+        - -setup_local_pc.sh
+    stage:
+      - $exclude
+    prime:
+      - $exclude
+  
