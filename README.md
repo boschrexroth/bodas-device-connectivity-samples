@@ -108,7 +108,7 @@ To communicate with the RCU a SSH connection can be established too using the Et
 
 ### Development and Testing
 
-The following picture shows the high level architecture of our sample code during development on the developer computer. CAN1 is connected to CAN2 and we have an internal shell script which is generating CAN messages and sending those messages to CAN 2. Two 120 Ohm resistors per CAN-channel are needed to properly terminate the CAN-bus.
+The following picture shows the high level architecture of our sample code during development on the developer computer. can1 is connected to can2 and we have an internal shell script which is generating CAN messages and sending those messages to can2. Two 120 Ohm resistors per CAN-channel are needed to properly terminate the CAN-bus.
 
 ![Development Architecture][dev-architecture]
 
@@ -291,7 +291,7 @@ scp <<snapname_version>>_armhf.snap <<user_name>>@<<IPv4 Address 3>>:/home/<<use
   snap remove <<snapname_version>>_armhf.snap --purge
   ```
   
-The following picture shows the high level architecture of our sample code during the test on the Rexroth Connectivity Unit. CAN1 is still connected to CAN2 and we still have an internal shell script which is generating CAN messages and sending those messages to CAN 2. Two 120 Ohm resistors per CAN-channel are needed to properly terminate the CAN-bus.
+The following picture shows the high level architecture of our sample code during the test on the Rexroth Connectivity Unit. can1 is still connected to can2 and we still have an internal shell script which is generating CAN messages and sending those messages to can2. Two 120 Ohm resistors per CAN-channel are needed to properly terminate the CAN-bus.
 
 ![Development Architecture][rcu-architecture]
 
@@ -333,7 +333,7 @@ and Eclipse Distribution License v2.0
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [img-infrastructure]: images/dev_infrastructure.png
 [dev-architecture]: images/dev_architecture.png
-[rcu-architecture]: images/dev_architecture.png
+[rcu-architecture]: images/rcu_architecture.png
 [test-dev]: images/test_from_dev.png
 [build-results]: images/build_results.png
 [test-rcu]: images/test_from_rcu.png
