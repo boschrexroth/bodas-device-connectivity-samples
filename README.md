@@ -108,7 +108,7 @@ To communicate with the RCU a SSH connection can be established too using the Et
 
 ### Development and Testing
 
-The following picture shows the high level architecture of our sample code during development on the developer computer. CAN1 is connected to CAN2 and we have an internal shell script which is generating CAN messages and sending those messages to CAN 2. Two 120 Ohm are are used for ensuring the correct termination (60 Ohm between High and Low).
+The following picture shows the high level architecture of our sample code during development on the developer computer. CAN1 is connected to CAN2 and we have an internal shell script which is generating CAN messages and sending those messages to CAN 2. Two 120 Ohm resistors per CAN-channel are needed to properly terminate the CAN-bus.
 
 ![Development Architecture][dev-architecture]
 
@@ -208,6 +208,8 @@ The sample code is structured as follow:
 * Main functionality:
   * All messages received by the broker are printed on the console
   * A message is sent to the broker every 5 seconds
+  
+* Get in touch with us for getting the certificates and acces control list files that you need for the sample codes. Connect.Bodas@boschrexroth.de
 
 
 Use your preferred IDE for the chosen programming language. Develop your application on your computer using the remote access to the RCU, over <<IPv4 Address 3>>, to communicate with the MQTT Broker.
@@ -242,6 +244,10 @@ scp -r <<source_folder>> <<user_name>>@<<IPv4 Address 2>>:/home/<<user_name>>/
   ```sh
   export SNAPCRAFT_BUILD_ENVIRONMENT=host
   ```
+  * make sure that the install hook is executable under Linux.
+  ```sh
+  chmod +x /meta/hooks/install clean && snapcraft
+  ```
   * build and package your application.
   ```sh
   snapcraft clean && snapcraft
@@ -275,6 +281,12 @@ scp <<snapname_version>>_armhf.snap <<user_name>>@<<IPv4 Address 3>>:/home/<<use
   ```sh
   snap remove <<snapname_version>>_armhf.snap --purge
   ```
+  
+The following picture shows the high level architecture of our sample code during the test on the Rexroth Connectivity Unit. CAN1 is still connected to CAN2 and we still have an internal shell script which is generating CAN messages and sending those messages to CAN 2. Two 120 Ohm resistors per CAN-channel are needed to properly terminate the CAN-bus.
+
+![Development Architecture][rcu-architecture]
+
+The test results on the Rexroth Connectivity Unit are shown on the following picture:
 
 ![Testing Results from the RCU][test-rcu]
 
