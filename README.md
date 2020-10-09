@@ -193,6 +193,15 @@ Add this section to the `/etc/rexroth/rcu.json` configuration file on the RCU.
 }
 ```
 
+The shell script for generating can signals is using following can IDs: 001, 002, 003 and 004.
+Consequently add those IDs in the /etc/rexroth/can1.filter configuration file on the RCU.
+
+```
+001
+002
+003
+```
+
 #### Sample Code on the Developer Computer
 
 The sample code is structured as follow:
@@ -324,6 +333,7 @@ and Eclipse Distribution License v2.0
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [img-infrastructure]: images/dev_infrastructure.png
 [dev-architecture]: images/dev_architecture.png
+[rcu-architecture]: images/dev_architecture.png
 [test-dev]: images/test_from_dev.png
 [build-results]: images/build_results.png
 [test-rcu]: images/test_from_rcu.png
