@@ -1,0 +1,34 @@
+#  Copyright (c) 2021 Bosch Rexroth AG
+#  All rights reserved. See LICENSE file for details.
+name: python-can-example
+base: core18
+version: '1.0'
+summary: This is a sample CAN snap.
+description: |
+  This is a sample CAN snap written with Python.
+grade: devel
+confinement: devmode
+architectures:
+  - build-on: [armhf]
+    run-on: [armhf]
+
+apps:
+  run:
+    command: python3 $SNAP/bin/main.py
+    daemon: simple
+
+parts:
+  python-can-example:
+    plugin: python
+    python-version: python3
+    source: .
+    python-packages: []
+  bin:
+    build-attributes: [ no-patchelf ]
+    plugin: dump
+    source: .
+    prime:
+      - '*'
+    override-build: |
+      snapcraftctl build
+      chmod +x $SNAPCRAFT_PART_BUILD/usr/bin/*
