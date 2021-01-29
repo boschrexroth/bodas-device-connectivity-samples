@@ -79,7 +79,13 @@ Some topics are not covered by this programming guides and are prerequisites for
 
 In order to efficiently develop for the RCU you need (additionally to your developer computer) a build computer and a RCU for final testing. They have to be connected in the same TCP/IP network. The following picture shows an example infrastructure where the Developer Computer (IPv4 Address 1), the Build Computer (IPv4 Address 2) and the RCU (IPv4 Address 3) are connected to the same network.
 * `Developer Computer`: The developer computer is any computer that you would use for developing your application.
-* `Build Computer`: Applications will run on the RCU armhf processor architecture. It is therefore necessary to build and package the application on a computer with the same architecture. The build computer that you use shall therefore have an armhf processor architecture. Additionally SNAP application are always based on an Ubuntu core snap. On RCUs we mainly use core and core18. We also recommend to have a version of Ubuntu 18 installed on the build computer. The build computer we use is a Raspberry Pi 3, on which the version 18.05 of Ubuntu Server 32 bits is installed.
+* `Build Computer`: Applications will run on the RCU armhf processor architecture. 
+  It is therefore necessary to build and package the application on a computer with the same architecture. 
+  The build computer that you use shall therefore have an armhf processor architecture. 
+  Additionally SNAP application are always based on an Ubuntu core snap. 
+  On RCUs we mainly use core and core18. 
+  We also recommend to have a version of [Ubuntu 18](http://old-releases.ubuntu.com/releases/18.04.4/) installed on the build computer. 
+  The build computer we use is a Raspberry Pi 3, on which [32-bit Ubuntu Server 18.04](http://old-releases.ubuntu.com/releases/18.04.4/ubuntu-18.04.4-preinstalled-server-armhf+raspi3.img.xz) is installed.
 * `RCU`: We recommend to use an RCU4-3W for your development activities.
 
 ![Development Infrastructure][img-infrastructure]

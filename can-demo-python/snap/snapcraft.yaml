@@ -1,6 +1,6 @@
 #  Copyright (c) 2021 Bosch Rexroth AG
 #  All rights reserved. See LICENSE file for details.
-name: python-can-example
+name: python-can-example # Name of resulting snap.
 base: core18
 version: '1.0'
 summary: This is a sample CAN snap.
@@ -9,26 +9,29 @@ description: |
 grade: devel
 confinement: devmode
 architectures:
-  - build-on: [armhf]
-    run-on: [armhf]
+  - build-on: [ armhf ]
+    run-on: [ armhf ]
 
 apps:
   run:
-    command: python3 $SNAP/bin/main.py
-    daemon: simple
+    command: python3 $SNAP/bin/main.py # Declares command to be run on start up.
+    daemon: simple # Specifies the snap should be started on boot up.
+    restart-condition: always # On failure the snap is restarted.
+    #environment:
+    #  LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP/usr/lib/
 
 parts:
   python-can-example:
-    plugin: python
+    plugin: python # Use python plugin to build snap.
     python-version: python3
     source: .
-    python-packages: []
+    python-packages: [ ]
   bin:
     build-attributes: [ no-patchelf ]
-    plugin: dump
+    plugin: dump # Pack all files into snap (e.g. usr/bin/cansend)
     source: .
     prime:
       - '*'
-    override-build: |
-      snapcraftctl build
-      chmod +x $SNAPCRAFT_PART_BUILD/usr/bin/*
+    #override-build: |
+    #  snapcraftctl build
+    #  chmod +x $SNAPCRAFT_PART_BUILD/usr/bin/*
