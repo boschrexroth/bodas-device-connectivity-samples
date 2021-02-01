@@ -108,3 +108,9 @@ The snap will merge the payloads and return a new message on can1.
 ```
 can1 003#BBBBBBBBAAAAAAAA
 ```
+
+If you would like to uninstall the snap again, you can do so like below.
+
+```
+snap remove --purge python-can-example
+```
