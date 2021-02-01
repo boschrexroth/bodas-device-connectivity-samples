@@ -17,8 +17,6 @@ apps:
     command: python3 $SNAP/bin/main.py # Declares command to be run on start up.
     daemon: simple # Specifies the snap should be started on boot up.
     restart-condition: always # On failure the snap is restarted.
-    #environment:
-    #  LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP/usr/lib/
 
 parts:
   python-can-example:
@@ -32,6 +30,3 @@ parts:
     source: .
     prime:
       - '*'
-    #override-build: |
-    #  snapcraftctl build
-    #  chmod +x $SNAPCRAFT_PART_BUILD/usr/bin/*

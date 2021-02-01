@@ -29,10 +29,25 @@ sudo snap install snapcraft --classic
 ### Build
 
 The build computer (the RasPi) is now ready to compile your snap. Just copy the whole snap folder [can-demo-python](.)
-onto the RasPi. Make sure the folder and its contents are owned by your user `ubuntu`.
+onto the RasPi. Using a USB drive this can be done by following instructions.
 
 ```
-sudo chown ubuntu:ubuntu can-demo-python
+# Mount the USB drive at the moint point /mnt (note: the device may vary e.g. sda, sdb, ...).
+sudo mount /dev/sda1 /mnt
+# Copy the folder recursively into the current directory.
+sudo cp -R /mnt/can-demo-python ./can-demo-python
+```
+
+Make sure the folder and its contents are owned by your user `ubuntu`.
+
+```
+sudo chown -R ubuntu:ubuntu ./can-demo-python
+```
+
+It's also important that the snapcraft environment variable `SNAPCRAFT_BUILD_ENVIRONMENT` is set to "host" before building.
+
+```
+export SNAPCRAFT_BUILD_ENVIRONMENT=host
 ```
 
 Then just run the [build script](build.sh).
