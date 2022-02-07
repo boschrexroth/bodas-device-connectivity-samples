@@ -1,1 +1,5 @@
-List of dependencies and their licenses
+boschrexroth.com/can-demo-golang,https://github.com/boschrexroth/bodas-device-connectivity-samples/blob/master/can-demo-golang/LICENSE,MIT
+go.einride.tech/can,Unknown,MIT
+golang.org/x/net,Unknown,BSD-3-Clause
+golang.org/x/sys,Unknown,BSD-3-Clause
+golang.org/x/sync/errgroup,Unknown,BSD-3-Clause

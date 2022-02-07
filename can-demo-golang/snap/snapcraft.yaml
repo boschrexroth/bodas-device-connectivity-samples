@@ -1,0 +1,29 @@
+name: can-demo
+base: core18
+version: '0.1.0'
+summary: This is a sample CAN snap.
+description: |
+  This is a sample CAN snap written with Go.
+
+architectures:      
+  - build-on: amd64
+    run-on: armhf
+
+grade: devel
+confinement: strict
+
+apps:
+  run:
+    command: bin/can-demo
+    daemon: simple
+
+parts:
+  res:
+    plugin: dump
+    source: .
+    prime:
+      #- 'conf'
+      #- 'certs'
+      - 'COPYRIGHT'
+      - 'LICENSE'
+      - 'bin/can-demo'
