@@ -8,6 +8,9 @@ import (
 
 func main() {
 	fmt.Println("Hello world")
-	can.CanSend()
-	can.CanRecv()
+	canDevice := can.NewCanDevice("can1")
+
+	frame := canDevice.CanRecv()
+	frame = can.InveretEndianness(frame)
+	canDevice.CanSend(frame)
 }
