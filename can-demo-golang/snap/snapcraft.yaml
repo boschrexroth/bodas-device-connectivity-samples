@@ -2,7 +2,7 @@
 #  All rights reserved. See LICENSE file for details.
 name: can-demo # Name of resulting snap.
 base: core18
-version: '0.1.0'
+version: '0.2.0'
 summary: This is a sample CAN snap.
 description: |
   This is a sample CAN snap written with Go.
@@ -21,6 +21,12 @@ apps:
     plugs: [ network ] # Grants access to network devices like can.
     restart-condition: always # On failure the snap is restarted.
 
+  frontend: # Multiple apps are possible to pack in one snap. This second app represents the frontend.
+    command: bin/frontend
+    daemon: simple
+    plugs: [ network, network-bind ]
+    restart-condition: always
+
 parts:
   res:
     plugin: dump # Pack files into snap.
@@ -29,3 +35,5 @@ parts:
       - 'COPYRIGHT'
       - 'LICENSE'
       - 'bin/can-demo'
+      - 'bin/frontend'
+      - 'static'

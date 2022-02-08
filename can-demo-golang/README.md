@@ -63,6 +63,9 @@ It does not represent a production-grade project.
 The file [`cmd/can-demo/can-demo.go`](cmd/can-demo/can-demo.go) represents the entry point calling all other functions.
 Further, the actual business logic resides in [`pkg/can/can.go`](pkg/can/can.go).
 
+The file [`cmd/frontend/frontend.go`](cmd/frontend/frontend.go) represents the entry point for the frontend.
+The frontend's business logic resides in [`pkg/frontend/server.go`](pkg/frontend/server.go).
+
 The snap is defined in [snap/snapcraft.yaml](snap/snapcraft.yaml). See comments for a few detail information about the
 key instructions.
 
@@ -104,6 +107,36 @@ If you would like to uninstall the snap again, you can do so like below.
 ```
 snap remove --purge can-demo
 ```
+
+### Frontend
+
+The frontend needs some tweaking of the RCU to work, due to the restrictive firewall of the RCU.
+Therefore, drop all firewall rules and replace the default DROP by default ACCEPT on all chains.
+Careful, this setting is only for development purposes.
+For a productive application the firewall rules need to be thoroughly specified.
+Also, after boot the RCU will re-apply the original default firewall rules.
+
+```
+iptables -X
+iptables -F
+iptables -P INPUT ACCEPT
+iptables -P FORWARD ACCEPT
+iptables -P OUTPUT ACCEPT
+```
+
+Subsequently, it is possible to access the frontend, when connected via Ethernet.
+Just open a web browser of your choice and access the following resource.
+The value `<rcu_ip>` should be replaced by the RCU's IP address.
+
+```
+http://<rcu_ip>:3000/
+```
+
+The browser should show the frontend as below.
+By entering and submitting an ID and a CAN payload, the frontend will pass the values to the web server.
+Hereafter, the webserver creates a CAN frame object and sends it via `can1` on the CAN bus.
+
+![Frontend - CAN Sender](docs/img/can_sender_frontend.png)
 
 ## Copyright
 
