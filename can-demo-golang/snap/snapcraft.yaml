@@ -1,4 +1,6 @@
-name: can-demo
+#  Copyright (c) 2022 Bosch Rexroth AG
+#  All rights reserved. See LICENSE file for details.
+name: can-demo # Name of resulting snap.
 base: core18
 version: '0.1.0'
 summary: This is a sample CAN snap.
@@ -10,20 +12,20 @@ architectures:
     run-on: armhf
 
 grade: devel
-confinement: strict
+confinement: strict # Strict confines the snap's access to only its sandbox.
 
 apps:
   run:
-    command: bin/can-demo
-    daemon: simple
+    command: bin/can-demo # Declares command to be run on start up.
+    daemon: simple # Specifies the snap should be started on boot up.
+    plugs: [ network ] # Grants access to network devices like can.
+    restart-condition: always # On failure the snap is restarted.
 
 parts:
   res:
-    plugin: dump
+    plugin: dump # Pack files into snap.
     source: .
     prime:
-      #- 'conf'
-      #- 'certs'
       - 'COPYRIGHT'
       - 'LICENSE'
       - 'bin/can-demo'

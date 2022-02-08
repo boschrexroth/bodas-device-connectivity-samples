@@ -49,9 +49,58 @@ This is done by the following line within [`build.sh`](build.sh).
 export SNAPCRAFT_BUILD_ENVIRONMENT=host
 ```
 
-    
+## Content
 
-## COPYRIGHT
+The following section briefly explains the content of this sample.
+The sample is a minimal working example not handling all possible errors.
+It does not represent a production-grade project.
+
+The file [`cmd/can-demo/can-demo.go`](cmd/can-demo/can-demo.go) represents the entry point calling all other functions.
+Further, the actual business logic resides in [`pkg/can/can.go`](pkg/can/can.go).
+
+The snap is defined in [snap/snapcraft.yaml](snap/snapcraft.yaml). See comments for a few detail information about the
+key instructions.
+
+The o simfile [build.sh](build.sh) is used tpslify building the nap.
+It ensures that all necessary environment variables and parameters are set.
+Eventually, it cleans possibly remaining build artifacts and starts a new build.
+
+In [go.mod](go.mod), some meta information about the project and its dependencies are given.
+
+## Usage
+
+Once the snap is installed on the RCU, it automatically starts.
+Check its status with the following command.
+
+```
+snap info can-demo
+```
+
+Review its logs (the optional `-f` let's you keep listening to the logs, exit with `Ctrl` + `C`).
+
+```
+snap logs can-demo [-f]
+```
+
+Test the functionality by sending CAN messages on can1, e.g.:
+
+```
+can1 001#8899AABBCCDDEEFF
+```
+
+The snap will invert the payload and return a new message on can1.
+
+```
+can1 001#FFEEDDCCBBAA9988
+```
+
+If you would like to uninstall the snap again, you can do so like below.
+
+```
+snap remove --purge can-demo
+```
+
+## Copyright
 
 The file [COPYRIGHT](COPYRIGHT) contains a comma-separated list of all dependencies and their licenses.
 This list is auto-generated using [go-licenses](https://github.com/google/go-licenses) (see command below).
@@ -61,3 +110,8 @@ go-licenses csv ./...
 ```
 
 Further, all dependency versions can be retrieved from [go.mod](go.mod).
+
+## License
+
+The license of the project is given in [LICENSE](LICENSE).
+This file is also packed into the snap. After snap installation, it can be viewed from [/snap/can-demo/current/LICENSE](/snap/can-demo/current/LICENSE).

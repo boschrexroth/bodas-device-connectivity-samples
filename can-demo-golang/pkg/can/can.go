@@ -1,3 +1,5 @@
+// Copyright (c) 2022 Bosch Rexroth AG
+// All rights reserved. See LICENSE file for details.
 package can
 
 import (
@@ -35,7 +37,7 @@ func (c CanDevice) CanRecv() can.Frame {
 	return frame
 }
 
-func InveretEndianness(frame can.Frame) can.Frame {
+func InvertEndianness(frame can.Frame) can.Frame {
 	fmt.Printf("Original CAN Frame: \t\t%s\n", frame.String())
 	be := frame.Data.PackBigEndian()
 	frame.Data.UnpackLittleEndian(be)
