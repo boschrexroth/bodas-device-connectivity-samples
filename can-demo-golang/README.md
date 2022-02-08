@@ -13,11 +13,16 @@ It is recommended to use a Linux system.
 Building on Windows might work as well, but was not tested.
 All following instructions will assume a Linux system.
 
+For compilation the Go compiler needs to be installed (see the [official documentation](https://go.dev/)).
+
 In order to build a snap, snapcraft needs to be installed with following command.
 
 ```
 sudo snap install snapcraft --classic
 ```
+
+Note, the above instruction uses the snap daemon to install snapcraft.
+If this is not by default installed on the system, the installation is explained in the [snapcraft documentation](https://snapcraft.io/docs/installing-snapd).
 
 ### Build
 
@@ -61,7 +66,7 @@ Further, the actual business logic resides in [`pkg/can/can.go`](pkg/can/can.go)
 The snap is defined in [snap/snapcraft.yaml](snap/snapcraft.yaml). See comments for a few detail information about the
 key instructions.
 
-The o simfile [build.sh](build.sh) is used tpslify building the nap.
+The file [build.sh](build.sh) is used to simplify building the snap.
 It ensures that all necessary environment variables and parameters are set.
 Eventually, it cleans possibly remaining build artifacts and starts a new build.
 
