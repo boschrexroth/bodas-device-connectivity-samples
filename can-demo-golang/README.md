@@ -9,22 +9,28 @@ The new message contains the merged payload (bitwise OR is applied) of both rece
 ## Setup and Build
 
 For building and installing the snap a certain build environment needs to be set up.
-It is recommended to use a Linux system.
-Building on Windows might work as well, but was not tested.
-All following instructions will assume a Linux system.
+It is recommended to use a Raspberry Pi 3 as a build computer.
 
-For compilation the Go compiler needs to be installed (see the [official documentation](https://go.dev/)).
+### Raspberry Pi
 
-In order to build a snap, snapcraft needs to be installed with following command.
+The Raspberry Pi (RasPi) should run a 32-bit Ubuntu 18. Specifically, we
+recommend [ubuntu-18.04.4-preinstalled-server-armhf+raspi3.img.xz](http://old-releases.ubuntu.com/releases/18.04.4/ubuntu-18.04.4-preinstalled-server-armhf+raspi3.img.xz)
+from the [Ubuntu release archive](http://old-releases.ubuntu.com/releases/18.04.4/). 
+Flash it onto the RasPi's SD card using a tool of your choice (e.g. [Rufus](https://rufus.ie/) (recommended)
+or [Balena Etcher](https://www.balena.io/etcher/)).
+
+Subsequently, plug the card in the RasPi and boot it (default credentials should be `user: ubuntu`
+and `password: ubuntu`).
+[Set up wifi](https://netplan.io/examples/) or plug the RasPi into your router via ethernet. 
+Before building the snap, you need to install snapcraft as follows.
 
 ```
 sudo snap install snapcraft --classic
 ```
 
-Note, the above instruction uses the snap daemon to install snapcraft.
-If this is not by default installed on the system, the installation is explained in the [snapcraft documentation](https://snapcraft.io/docs/installing-snapd).
-
 ### Build
+
+For compilation the Go compiler needs to be installed (see the [official documentation](https://go.dev/)).
 
 The build computer is now ready to compile your snap.
 Just copy the whole snap folder [can-demo-golang](.) onto the build computer.
@@ -35,11 +41,11 @@ bash build.sh
 ```
 
 After successful execution, there will be the resulting
-snap [can-demo_0.1.0_armhf.snap](can-demo_0.1.0_armhf.snap).
+snap [can-demo_0.2.0_armhf.snap](can-demo_0.2.0_armhf.snap).
 You can now copy it onto the RCU and install it.
 
 ```
-snap install can-demo_0.1.0_armhf.snap --dangerous
+snap install can-demo_0.2.0_armhf.snap --dangerous
 ```
 
 ### Notes on Build Setup
@@ -117,11 +123,11 @@ For a productive application the firewall rules need to be thoroughly specified.
 Also, after boot the RCU will re-apply the original default firewall rules.
 
 ```
-iptables -X
-iptables -F
 iptables -P INPUT ACCEPT
 iptables -P FORWARD ACCEPT
 iptables -P OUTPUT ACCEPT
+iptables -X
+iptables -F
 ```
 
 Subsequently, it is possible to access the frontend, when connected via Ethernet.
